@@ -1,0 +1,44 @@
+int sensorValue = 0;
+int sensePin = A1;  
+int sensorInput;    
+double temp; 
+
+void setup()
+{
+  pinMode(A0, INPUT);
+  Serial.begin(9600);
+  pinMode(9, OUTPUT);
+  pinMode(13, OUTPUT);
+  pinMode(2, INPUT);
+}
+
+void loop()
+{
+  
+  sensorValue = analogRead(A0);
+  
+  Serial.println(sensorValue);
+  
+  analogWrite(9, map(sensorValue, 0, 1023, 0, 255));
+  delay(100);
+  
+  digitalWrite(13,0);
+  int a = digitalRead(4);
+  Serial.println(a);
+  if(a==1){
+    Serial.println("MOTION DETECTED!!!");
+    digitalWrite(13, HIGH);
+  } else {
+    digitalWrite(13, LOW);
+  }
+  delay(10);
+  
+  sensorInput = analogRead(A1);    
+  temp = (double)sensorInput / 1024;       
+  temp = temp * 5;                 
+  temp = temp - 0.5;                
+  temp = temp * 100;               
+ 
+  Serial.print("Current Temperature: ");
+  Serial.println(temp);
+}
