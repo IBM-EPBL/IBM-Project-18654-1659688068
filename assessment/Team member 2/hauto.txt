@@ -1,0 +1,30 @@
+#include<Servo.h>
+Servo s;
+void setup()
+{
+  Serial.begin(9600);
+  s.attach(3);
+  s.write(0);
+  pinMode(13,OUTPUT);
+  pinMode(4,INPUT);
+ 
+}
+
+void loop()
+	{
+  int val = digitalRead(4);
+  Serial.println(val);
+  if(val==HIGH){
+    digitalWrite(13,HIGH);
+    s.write(180);
+    
+   }
+  else{
+    digitalWrite(13,LOW);
+   s.write(0);
+  		}
+  
+  delay(10);
+  
+
+}
