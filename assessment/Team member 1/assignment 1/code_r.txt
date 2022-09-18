@@ -1,0 +1,63 @@
+#include <LiquidCrystal.h>
+const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+const int PIR = 8;
+const int bulb = 7;
+const int tempPin = A1;
+const int fan = 10;
+int temp;
+int tempMin = 30;
+int tempMax = 60;
+int fanSpeed;
+int fanLCD;
+int PIRState = 0;
+
+void setup() {
+  pinMode(PIR, INPUT);
+  pinMode(bulb, OUTPUT);
+  pinMode(fan, OUTPUT);
+  pinMode(tempPin, INPUT);
+  lcd.begin(16, 2);
+}
+
+void loop() {
+  PIRState = digitalRead(PIR);
+  if (PIRState == HIGH)
+  {
+    digitalWrite(bulb, HIGH);
+  }
+  
+  if (PIRState == LOW)
+  {
+    digitalWrite(bulb, LOW);
+  }
+  
+  if
+  (temp = readTemp());
+  
+  if (temp < tempMin)
+  {
+    fanSpeed = 0;
+    analogWrite(fan, fanSpeed);
+    fanLCD = 0;
+    digitalWrite(fan, LOW);
+  }
+  if ((temp >= tempMin) && (temp <= tempMax))
+  {
+    fanSpeed = temp;
+    fanSpeed = 1.5 * fanSpeed;
+    fanLCD = map(temp, tempMin, tempMax, 0, 100);
+    analogWrite(fan, fanSpeed);
+  }
+
+  lcd.print("TEMP: ");
+  lcd.print(temp);
+  lcd.print("C ");
+  lcd.setCursor(0, 0);
+  delay(200);
+}
+
+  int readTemp() {
+    temp = analogRead(tempPin);
+    return temp * 0.48828125;
+  }

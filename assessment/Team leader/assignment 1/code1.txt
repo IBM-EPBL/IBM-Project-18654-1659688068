@@ -1,0 +1,26 @@
+void setup()
+{
+  pinMode(7,OUTPUT);
+  pinMode(12,OUTPUT);
+  pinMode(2,INPUT);
+  pinMode(4,INPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  int a = digitalRead(4);
+  int b = digitalRead(2);
+  digitalWrite(7,LOW);
+  if(b == 1){
+    Serial.println("someone is outside!!");
+    tone(12,2500);
+    delay(500);
+  }
+  else
+    noTone(12);
+  if(a==1){
+    Serial.println("inner house motion detected!!");
+    digitalWrite(7,HIGH);
+  }
+  delay(1000);
+}
