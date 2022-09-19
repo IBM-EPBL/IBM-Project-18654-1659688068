@@ -1,3 +1,4 @@
+
 #include<Servo.h>
 Servo s;
 void setup()
@@ -7,24 +8,43 @@ void setup()
   s.write(0);
   pinMode(13,OUTPUT);
   pinMode(4,INPUT);
- 
+  pinMode(2,INPUT); 
 }
-
 void loop()
-	{
+{
   int val = digitalRead(4);
+  int b   = digitalRead(2);
   Serial.println(val);
   if(val==HIGH){
+    Serial.println("inner house motion detected!!");
+    digitalWrite(7,HIGH);
     digitalWrite(13,HIGH);
-    s.write(180);
-    
-   }
+    Serial.println("Door is openned");
+    s.write(180);   
+               }
   else{
+    
     digitalWrite(13,LOW);
-   s.write(0);
-  		}
-  
+    s.write(0);
+  	  }
   delay(10);
+  if(b == 1){
+    Serial.println("someone is outside!!");
+    tone(12,2500);
+    delay(500);
+             }
+}
+  
+    
   
 
-}
+  
+  
+
+
+
+
+
+  
+  
+	
