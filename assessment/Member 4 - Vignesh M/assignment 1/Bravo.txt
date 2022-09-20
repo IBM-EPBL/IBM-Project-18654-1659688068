@@ -1,0 +1,46 @@
+
+int LightPin = 4;
+int Photo_Pin = A0;
+int readPhoto; 
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(9, OUTPUT);
+  pinMode(13, OUTPUT);
+  pinMode(2, INPUT);
+
+  pinMode(LightPin, OUTPUT);
+  pinMode(Photo_Pin, INPUT);
+  
+
+}
+
+void loop()
+{
+  digitalWrite(13,0);
+  int a = digitalRead(2);
+  Serial.println(a);
+  if(a==1){
+    Serial.println("MOTION DETECTED!!!");
+    digitalWrite(13, HIGH);
+  } else {
+    digitalWrite(13, LOW);
+  }
+  delay(100);
+  
+  
+    
+  readPhoto = analogRead(Photo_Pin);
+  
+  if (readPhoto < 518) {
+  digitalWrite(LightPin, HIGH);
+  }else{
+      digitalWrite(LightPin, LOW);
+  }
+  
+  delay(1);               
+  
+  
+    
+}
