@@ -1,7 +1,7 @@
 import random
 import time
 
-while Tru:
+while True:
     temperature=random.randint(0, 100 )
     print("temperature - ",temperature)
     if(temperature > 50):
