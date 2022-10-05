@@ -1,0 +1,14 @@
+import random
+import time
+print("Farm Conditions")
+while True:
+    SenseTemp=(round(random.uniform(5.5, 70.5), 2))
+    SenseHumid=(round(random.uniform(0.5, 99.5), 2))
+    print("The Farm Temperature is:",)
+    print(SenseTemp)
+    print("The Humidity of soil is:")
+    print(SenseHumid)
+    if (SenseTemp>=45):
+        print("!!! SECURITY WARNING !!!")
+        print("Temperature is High")
+        time.sleep(10)
