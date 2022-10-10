@@ -1,0 +1,11 @@
+import random
+print('''NOTE: If the temperature/humidity value is greater
+than 150, it is considered as 'HAZARDOUS' ''')
+temp=random.sample(range(100,200),10)
+humi=random.sample(range(100,200),10)
+print('temperature:',temp)
+print('Humidity:',humi)
+for j in range(10):
+    if((temp[j]>150) or (humi[j]>150)):
+        print('-----Hazardous-----')
+        
